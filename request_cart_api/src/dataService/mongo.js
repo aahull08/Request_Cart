@@ -4,15 +4,13 @@ const reqModel = require('./models');
 main().catch(err => console.log(err));
 
 async function main() {
-  await mongoose.connect('mongodb://localhost:27017/requestBin');
+  // await mongoose.connect('mongodb://localhost:27017/requestBin');
+  await mongoose.connect('mongodb://127.0.0.1:27017/requestBin');
 }
 
 async function insertOne(req) {
   const reqDoc = new reqModel(req);
   const { _id: id } = await reqDoc.save();
-  // const stringId = id.toString();
-  // const result = await reqModel.findById(stringId)
-  // console.log("Aaron wants to try: ", result)
   return id.toString();
 }
 
