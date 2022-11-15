@@ -2,7 +2,7 @@ import AddShoppingCartOutlinedIcon from "@mui/icons-material/AddShoppingCartOutl
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 
-const GenerateBin = () => {
+const GenerateCart = () => {
   return (
     <Stack
       direction="column"
@@ -20,4 +20,4 @@ const GenerateBin = () => {
   );
 };
 
-export default GenerateBin;
+export default GenerateCart;

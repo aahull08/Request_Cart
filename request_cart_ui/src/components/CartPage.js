@@ -13,8 +13,8 @@ const CartPage = () => {
   const [requests, setRequests] = useState([]);
   const [cartInfo, setCartInfo] = useState({active: true});
   const location = useLocation()
-  const binId = location.pathname.split("/")[2]
-  const endPoint = `http://localhost:4568/req/${binId}`
+  const cartId = location.pathname.split("/")[2]
+  const endPoint = `/req/${cartId}`
   
   useEffect(() => {
     const websocket = new WebSocket(WEBSOCKET_SERVER_URL);
@@ -24,9 +24,9 @@ const CartPage = () => {
         const interval = setInterval(() => {
           if (websocket.readyState === 1) {
             clearInterval(interval);
-            websocket.send(JSON.stringify({ type: 'new_subscriber', publicId: binId }));
+            websocket.send(JSON.stringify({ type: 'new_subscriber', publicId: cartId }));
             websocket.onmessage = async () => {
-              const result = await axios.get(`http://localhost:4568/bin/${binId}`)
+              const result = await axios.get(`/carts/${cartId}`)
               setRequests(result.data.requests || []);
             };
             resolve(websocket);
@@ -40,12 +40,12 @@ const CartPage = () => {
       websocket.close()
     }
     return closeSocket
-  }, [binId])
+  }, [cartId])
 
   useEffect(() => {
     const getRequests = async () => {
       try{
-        const result = await axios.get(`http://localhost:4568/bin/${binId}`)
+        const result = await axios.get(`/carts/${cartId}`)
         setCartInfo(result.data.binInfo);
         setRequests(result.data.requests || []);
       } catch (err) {
@@ -54,11 +54,11 @@ const CartPage = () => {
     };
 
     getRequests();
-  }, [binId]);
+  }, [cartId]);
 
   const handleRefreshClick = async () => {
     try{
-      const result = await axios.get(`http://localhost:4568/bin/${binId}`)
+      const result = await axios.get(`/carts/${cartId}`)
       setRequests(result.data.requests || []);
     } catch (err) {
       console.log(err)
@@ -76,7 +76,7 @@ const CartPage = () => {
       alignItems="center"
       spacing={7}>
       <Typography variant="h3" sx={{ color: "white", pt: 5, pl: 10, pr: 5, }}>
-        Your Bin
+        Your Cart
       </Typography>
       <Typography
         variant="h6"

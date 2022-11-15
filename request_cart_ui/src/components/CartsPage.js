@@ -13,22 +13,21 @@ import { Button } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
-const BinsPage = () => {
+const CartsPage = () => {
   const [carts, setCarts] = useState([]);
 
   const navigate = useNavigate();
 
   useEffect(() => {
     const getCarts = async () => {
-      const result = await axios.get(`http://localhost:4568/bins`);
+      const result = await axios.get(`/carts`);
       setCarts(result.data);
     };
     getCarts();
   }, []);
 
   const handleNewCartClick = async () => {
-    const newCart = await axios.post("http://localhost:4568/bins");
-    console.log(newCart.data.binId);
+    const newCart = await axios.post("/carts");
     const newCarts = [...carts, newCart.data.binId];
     setCarts(newCarts);
   };
@@ -39,7 +38,7 @@ const BinsPage = () => {
   };
 
   const handleDelete = async (url) => {
-    await axios.delete(`http://localhost:4568/carts/${url}`)
+    await axios.delete(`/carts/${url}`)
     const newCarts = carts.filter(cart => url !== cart)
     console.log(newCarts)
     setCarts(newCarts)
@@ -84,8 +83,8 @@ const BinsPage = () => {
         <Table sx={{ minWidth: 30 }} aria-label="simple table">
           <TableHead>
             <TableRow>
-              <TableCell>Bin ID</TableCell>
-              <TableCell>Bin URL</TableCell>
+              <TableCell>Cart ID</TableCell>
+              <TableCell>Cart URL</TableCell>
               <TableCell></TableCell>
             </TableRow>
           </TableHead>
@@ -114,4 +113,4 @@ const BinsPage = () => {
   );
 };
 
-export default BinsPage;
+export default CartsPage;

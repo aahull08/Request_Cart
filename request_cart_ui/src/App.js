@@ -2,8 +2,8 @@ import { createTheme, ThemeProvider } from "@mui/material";
 import { Routes, Route} from "react-router-dom";
 import Layout from "./components/Layout";
 import Homepage from "./components/Homepage";
-import BinsPage from "./components/BinsPage";
 import CartPage from "./components/CartPage";
+import CartsPage from "./components/CartsPage";
 
 const theme = createTheme({
   typography: {
@@ -47,7 +47,7 @@ function App() {
         <Layout>
           <Routes>
             <Route path="/" element={<Homepage />} />
-            <Route path="/carts" element={<BinsPage />} />
+            <Route path="/carts" element={<CartsPage />} />
             <Route path="/carts/:cartURL" element={<CartPage />} />
           </Routes>
         </Layout>

@@ -11,9 +11,10 @@ app.use(cors());
 app.use(express.json());
 app.use(express.text());
 app.use(express.urlencoded());
-app.use(express.static("public"));
+app.use(express.static("build"));
 
-app.get("/bins", async (request, response) => {
+
+app.get("/carts", async (request, response) => {
   const ip = request.ip //use locally
     // const ip = request.headers['x-forwarded-for']; // use this on nginx
 
@@ -49,17 +50,17 @@ app.all("/req/:publicId", async (request, response) => {
   }
 });
 
-app.get("/bin/:binId", async (request, response) => {
-  const binId = request.params.binId;
+app.get("/carts/:cartId", async (request, response) => {
+  const cartId = request.params.cartId;
   try {
-    const binAndRequetsObj = await dataService.getBinInfoAndRequests(binId);
-    response.status(200).json(binAndRequetsObj);
+    const cartAndRequetsObj = await dataService.getBinInfoAndRequests(cartId);
+    response.status(200).json(cartAndRequetsObj);
   } catch (err) {
     response.status(500).json({ error: err.message });
   }
 });
 
-app.post("/bins", async (request, response) => {
+app.post("/carts", async (request, response) => {
   const ip = request.ip
   const binId = uuidv4();
   try {

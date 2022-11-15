@@ -42,7 +42,7 @@ const Sidebar = () => {
             sx={{ color: "white" }}
             onClick={() => navigate("/carts")}
           >
-            Your Bins
+            Your Carts
           </Button>
         </Toolbar>
       </AppBar>

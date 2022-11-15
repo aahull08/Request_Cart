@@ -98,7 +98,6 @@ async function deleteCart(cartId){
   console.log(cartId)
   try{
     const sql = `DELETE FROM bins WHERE publicId = '${cartId}'`
-    console.log(sql)
     result = await pgClient.query(sql)
     return
   } catch (err) {

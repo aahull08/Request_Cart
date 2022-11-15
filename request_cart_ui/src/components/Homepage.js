@@ -1,6 +1,6 @@
 import Typography from "@mui/material/Typography";
 import Stack from "@mui/material/Stack";
-import GenerateBin from "./GenerateBin";
+import GenerateCart from "./GenerateCart";
 import MakeRequest from "./MakeRequest";
 import CheckResults from "./CheckResults";
 import { Button } from "@mui/material";
@@ -34,7 +34,7 @@ const Homepage = () => {
         justifyContent="center"
         alignItems="center"
         spacing={12}>
-        <GenerateBin />
+        <GenerateCart />
         <MakeRequest />
         <CheckResults />
       </Stack>
