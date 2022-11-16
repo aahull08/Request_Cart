@@ -38,6 +38,7 @@ app.all("/req/:publicId", async (request, response) => {
     await dataService.insert(request);
 
     const websocket = new ws(WEBSOCKET_SERVER_URL);
+    console.log(websocket)
     websocket.on("open", () => {
       const message = {
         type: "new_request",
