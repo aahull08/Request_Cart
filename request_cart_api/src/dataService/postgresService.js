@@ -13,6 +13,7 @@ async function main() {
   const connectionString = `postgres://${user}:${pw}@${host}/${db}`;
   pgClient = new pg.Client(connectionString);
   await pgClient.connect();
+  console.log("Connected to Postgres")
 }
 
 async function insertRequest(mongoId, publicId) {

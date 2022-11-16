@@ -4,7 +4,8 @@ const dataService = require("./dataService/dataService");
 const app = express();
 const { v4: uuidv4 } = require('uuid');
 const ws = require("ws");
-const WEBSOCKET_SERVER_URL = "ws://localhost:7071";
+// const WEBSOCKET_SERVER_URL = "ws://localhost:7071";
+const WEBSOCKET_SERVER_URL = "wss://requestbin.ahullstackdeveloper.com/wsapp"
 port = 4568;
 
 app.use(cors());
@@ -15,8 +16,8 @@ app.use(express.static("build"));
 
 
 app.get("/carts", async (request, response) => {
-  const ip = request.ip //use locally
-    // const ip = request.headers['x-forwarded-for']; // use this on nginx
+  // const ip = request.ip //use locally
+  const ip = request.headers['x-forwarded-for']; // use this on nginx
 
   try{
     const result = await dataService.getBinsFromIp(ip)
