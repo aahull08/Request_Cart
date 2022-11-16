@@ -7,7 +7,7 @@ import axios from "axios";
 import RequestInfo from "./RequestInfo";
 import RefreshIcon from '@mui/icons-material/Refresh';
 import ContentCopyIcon from '@mui/icons-material/ContentCopy';
-const WEBSOCKET_SERVER_URL = "ws://localhost:7071";
+const WEBSOCKET_SERVER_URL = "wss://requestbin.ahullstackdeveloper.com/wsapp";
 const endpoint = "https://requestbin.ahullstackdeveloper.com/req"
 
 const CartPage = () => {
@@ -15,7 +15,7 @@ const CartPage = () => {
   const [cartInfo, setCartInfo] = useState({active: true});
   const location = useLocation()
   const cartId = location.pathname.split("/")[2]
-  const endPoint = `${endpoint}/req/${cartId}`
+  const endPoint = `${endpoint}/${cartId}`
   
   useEffect(() => {
     const websocket = new WebSocket(WEBSOCKET_SERVER_URL);
