@@ -17,25 +17,54 @@ const CartPage = () => {
   const cartId = location.pathname.split("/")[2]
   const endPoint = `${endpoint}/${cartId}`
   
-  useEffect(() => {
-    const websocket = new WebSocket(WEBSOCKET_SERVER_URL);
-    const setUpWebsocket = () => {
-      
-      return new Promise((resolve, reject) => {
-        const interval = setInterval(() => {
-          if (websocket.readyState === 1) {
-            clearInterval(interval);
-            websocket.send(JSON.stringify({ type: 'new_subscriber', publicId: cartId }));
-            websocket.onmessage = async () => {
-              const result = await axios.get(`/carts/${cartId}`)
-              setRequests(result.data.requests || []);
-            };
-            resolve(websocket);
-          }
-        }, 10);
-      });
-    }
+  // useEffect(() => {
+  //   let websocket;
+  //   const setUpWebsocket = async () => {
+  //     websocket = new WebSocket(WEBSOCKET_SERVER_URL);
+  //     return new Promise((resolve, reject) => {
+  //       const interval = setInterval(() => {
+  //         if (websocket.readyState === 1) {
+  //           clearInterval(interval);
+  //           websocket.send(JSON.stringify({ type: 'new_subscriber', publicId: cartId }));
+  //           websocket.onmessage = async () => {
+  //             const result = await axios.get(`/carts/${cartId}`)
+  //             setRequests(result.data.requests || []);
+  //           };
+  //           resolve(websocket);
+  //         }
+  //       }, 10);
+  //     });
+  //   }
+    
+  //   setUpWebsocket()
+  //   const closeSocket = () => {
+  //     websocket.close()
+  //   }
+  //   return closeSocket
+  // }, [cartId])
 
+    useEffect(() => {
+    let websocket;
+    const setUpWebsocket = async () => {
+      const setUp = () => {
+        websocket = new WebSocket(WEBSOCKET_SERVER_URL);
+        return new Promise((resolve, reject) => {
+          const interval = setInterval(() => {
+            if (websocket.readyState === 1) {
+              clearInterval(interval);
+              websocket.send(JSON.stringify({ type: 'new_subscriber', publicId: cartId }));
+              websocket.onmessage = async () => {
+                const result = await axios.get(`/carts/${cartId}`)
+                setRequests(result.data.requests || []);
+              };
+              resolve(websocket);
+            }
+          }, 10);
+        });
+      }
+      await setUp()
+    }
+    
     setUpWebsocket()
     const closeSocket = () => {
       websocket.close()
