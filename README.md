@@ -11,11 +11,17 @@ in a organized way.
 ## Technologies
 
 React
+
 Node.js
+
 Express.js
+
 Mongoose
+
 MongoDB
+
 PostgreSQL
+
 WebSockets
 
 ## Usage
@@ -31,3 +37,13 @@ Then you can create a Request Cart by clicking on the "Create New Cart" button.
 Then select the cart and you can view all of the request sent to that unique URL.
 
 ![Cart Page](https://github.com/aahull08/Request_Cart/blob/main/Readme%20Files/CartPage.png?raw=true)
+
+The cart page will be updated live using websockets so you will not have to reload the page in order to view the most recent requests.
+
+## Status
+
+This is a work in process but it is live and you can use it today [here](https://requestbin.ahullstackdeveloper.com/). If you have any thought or concerns let me know!
+
+## Future Work
+
+- Fix some of the sizing issues with shrinking screens and make it mobile friendly.
