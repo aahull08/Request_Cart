@@ -40,7 +40,6 @@ const CartsPage = () => {
   const handleDelete = async (url) => {
     await axios.delete(`/carts/${url}`)
     const newCarts = carts.filter(cart => url !== cart)
-    console.log(newCarts)
     setCarts(newCarts)
   };
 

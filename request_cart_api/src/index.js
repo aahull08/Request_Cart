@@ -12,7 +12,14 @@ app.use(cors());
 app.use(express.json());
 app.use(express.text());
 app.use(express.urlencoded());
-app.use(express.static("build"));
+// app.use(express.static("build"));
+
+if (process.env.NODE_ENV === "production") {
+  app.use("/", express.static("build"));
+  app.use("/carts", express.static("build"));
+  app.use("/carts/*", express.static("build"));
+
+}
 
 
 app.get("/carts", async (request, response) => {
@@ -38,7 +45,6 @@ app.all("/req/:publicId", async (request, response) => {
     await dataService.insert(request);
 
     const websocket = new ws(WEBSOCKET_SERVER_URL);
-    console.log(websocket)
     websocket.on("open", () => {
       const message = {
         type: "new_request",
@@ -63,7 +69,8 @@ app.get("/carts/:cartId", async (request, response) => {
 });
 
 app.post("/carts", async (request, response) => {
-  const ip = request.ip
+  // const ip = request.ip // use locally
+  const ip = request.headers['x-forwarded-for']; // use this on nginx
   const binId = uuidv4();
   try {
     dataService.createBin(binId, ip);

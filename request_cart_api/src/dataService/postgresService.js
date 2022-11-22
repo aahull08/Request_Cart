@@ -96,7 +96,6 @@ async function getBinInfo(publicBinId) {
 }
 
 async function deleteCart(cartId){
-  console.log(cartId)
   try{
     const sql = `DELETE FROM bins WHERE publicId = '${cartId}'`
     result = await pgClient.query(sql)

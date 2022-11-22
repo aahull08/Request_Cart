@@ -26,8 +26,6 @@ async function insert(request) {
   } catch (error) {
     console.error(error.message);
     const mongoResult = await mongo.deleteOne(mongoId);
-    // const readOneResult = await mongo.readOne(mongoId);
-    // console.log(readOneResult);
   }
 }
 
